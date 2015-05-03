@@ -1,0 +1,125 @@
+#include "myLib.h"
+#include "text.h"
+
+
+
+unsigned int buttons;
+unsigned int oldButtons;
+int state;
+int level;
+
+enum {STARTSCREEN,INSTRUCTIONS,GAMESCREEN,FINISHSCREEN,PAUSESCREEN};
+enum {LEV1,LEV2,LEV3};
+
+
+void splash();
+void instructions();
+void game();
+void win();
+void lose();
+void pause();
+void drawLevel();
+
+
+int main()
+{
+	//enable sprites in the REG_DISPCTL
+	REG_DISPCTL = MODE0 | BG0_ENABLE;
+        
+    initialize();   
+        
+	while(1)
+	{    
+		 switch(state)
+		{
+			case STARTSCREEN:
+				splash();
+				state = INSTRUCTIONS;
+				break;
+			case INSTRUCTIONS:
+				instructions();
+				state = GAMESCREEN;
+				break;
+			case GAMESCREEN:
+				game();
+				break;
+			case FINISHSCREEN:
+				finish();
+				state = STARTSCREEN;
+				break;
+			case PAUSESCREEN:
+				pause();
+				break;
+		}          
+
+	}
+
+	return 0;
+}
+
+void initialize() {
+	
+}
+
+
+void splash() {
+   	waitForVblank();
+    drawString(0, 20, "Press START to", WHITE);
+    drawString(10, 40, "go to Game Screen.", WHITE);
+
+    while (!BUTTON_HELD(BUTTON_START)) {
+    }
+
+    while(BUTTON_HELD(BUTTON_START)) {
+    }
+}
+
+void instructions() {
+	drawString(0, 20, "Press START to", WHITE);
+    drawString(10, 40, "go to Game Screen.", WHITE);
+
+    while (!BUTTON_HELD(BUTTON_START)) {
+    }
+
+    while(BUTTON_HELD(BUTTON_START)) {
+    }
+}
+
+void game() {
+	drawString(0, 20, "Game HERE", WHITE);
+    drawString(10, 40, "OR IT WILL BE...", WHITE);
+        while (!BUTTON_HELD(BUTTON_START)) {
+    }
+
+    while(BUTTON_HELD(BUTTON_START)) {
+    }
+
+}
+
+void finish() {
+	drawString(0, 20, "Your done!!!", WHITE);
+        while (!BUTTON_HELD(BUTTON_START)) {
+    }
+
+    while(BUTTON_HELD(BUTTON_START)) {
+    }
+}
+
+void pause() {
+	drawString(0, 20, "PAUSE!!!", WHITE);
+	        while (!BUTTON_HELD(BUTTON_START)) {
+    }
+
+    while(BUTTON_HELD(BUTTON_START)) {
+    }
+}
+
+void drawLevel() {
+	switch (level) {
+		case LEV1:
+
+		case LEV2:
+
+		case LEV3:
+	}
+}
